@@ -12,6 +12,7 @@ public static class InfrastuctureServiceCollectionRegistrationExtensions
             ArgumentNullException.ThrowIfNull(configuration);
             ArgumentNullException.ThrowIfNull(env);
 
+        services.AddLogging();
         services.AddPersistence(configuration, env);
 
         return services;
