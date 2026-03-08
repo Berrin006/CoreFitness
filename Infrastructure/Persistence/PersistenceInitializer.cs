@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Infrastructure.Persistence.EfCore.Contexts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Infrastructure.Persistence;
 
@@ -11,11 +14,15 @@ public class PersistenceInitializer
 
         if (env.IsDevelopment())
         {
-
+            using var scope = serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+            await context.Database.EnsureCreatedAsync(ct);
         }
         else
         {
-            
+            using var scope = serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+            await context.Database.MigrateAsync(ct);
         }
     }
 }

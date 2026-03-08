@@ -7,7 +7,7 @@ public static class LoggingRegistrationExtension
 {
     public static IServiceCollection AddLogging(this IServiceCollection services)
     {
-        services.AddSingleton<ILogger, Logger>();
+        services.AddScoped<ILogger, Logger>();
 
         return services;
     }

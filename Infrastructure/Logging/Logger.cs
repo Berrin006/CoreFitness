@@ -17,10 +17,10 @@ public sealed class Logger : ILogger
 
     public void Log(string message)
     {
-        var formatted = $"{DateTime.Now:0} | {message}";
+        var formatted = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} | {message}";
 
-        Console.WriteLine( formatted );
-        Debug.WriteLine( formatted );
+        Console.WriteLine("{0}", formatted);
+        Debug.WriteLine("{0}", formatted);
 
         File.AppendAllText(_logFilePath, formatted + Environment.NewLine);
     }
